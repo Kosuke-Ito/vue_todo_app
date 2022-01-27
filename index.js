@@ -26,18 +26,6 @@ const app = new Vue({
 		// インスタンス作勢時に自動的にfetchする
 		this.todos = todoStorage.fetch()
 	},
-
-	watch: {
-		// オプションを使う場合はオブジェクト形式にする
-		todos: {
-			handler: function (todos) {
-				todoStorage.save(todos)
-			},
-			// deep オプションでネストしているデータも監視できる
-			deep: true
-		}
-	},
-
 	methods: {
 		 // ToDo 追加の処理
 		doAdd: function (event, value) {
@@ -47,16 +35,20 @@ const app = new Vue({
 			if (!comment.value.length) {
 				return
 			}
+			
 			this.todos.push({
 				id:  todoStorage.uid++,
 				comment: comment.value,
 			})
-			// フォーム要素を空にする
+			todoStorage.save(this.todos)
+
 			comment.value = ""
 		},
 		doRemove: function (item) {
 			let index = this.todos.indexOf(item)
 			this.todos.splice(index, 1)
+			todoStorage.save(this.todos)
 		}
 	}
+
 })

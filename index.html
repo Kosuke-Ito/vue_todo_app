@@ -24,14 +24,14 @@
 					<th>{{ item.id }}</th>
 					<td>{{ item.comment }}</td>
 					<td class="button">
-						<button v-on:click.meta="doRemove(item)">
+						<button v-on:click.shift="doRemove(item)">
 							削除
 						</button>
 					</td>
 				</tr>
 			</tbody>
 		</table>
-		<p>※削除ボタンはコマンドキーを押しながらクリックして下さい</p>
+		<p>※削除ボタンはシフトキーを押しながらクリックして下さい</p>
 
 		<h2>新しい作業の追加</h2>
 		<form  class="add-form" v-on:submit.prevent="doAdd" >
