@@ -4,10 +4,6 @@ let todoStorage = {
 		let todos = JSON.parse(
 			localStorage.getItem(STORAGE_KEY) || '[]'
 		)
-		todos.forEach(function (todo, index) {
-			todo.id = index
-		})
-		todoStorage.uid = todos.length
 		return todos
 	},
 	save: function (todos) {
@@ -37,7 +33,7 @@ const app = new Vue({
 			}
 			
 			this.todos.push({
-				id:  todoStorage.uid++,
+				id:  this.todos.length > 0 ? this.todos.slice(-1)[0].id + 1 : 1,
 				comment: comment.value,
 			})
 			todoStorage.save(this.todos)
